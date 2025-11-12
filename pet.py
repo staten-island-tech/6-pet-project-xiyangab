@@ -13,22 +13,42 @@ class pet():
         print(f"your pets happiness level is {self.happinesslevel}%")
     def shockcollar(self):
         print("you have press shock collar button.")
-        self.happinesslevel -= 2
+        print(f"your pets happiness level went down by 5")
+        self.happinesslevel -= 5
     def feed(self):
         fchoice = ['bread','poop','pet treats','leftovers','fruits','vegetables']
         print(f"food choices: {fchoice}")
         food = input(f"what do you want to feed your pet?: ").lower()
         print(f"you fed your pet {food}")
-        while food not in fchoice:
-            print('that is invalid')
-            food = input(f"what do you want to feed your pet?: ").lower()
-        if fchoice == 'bread':
+        if food == 'bread':
             self.hungerlevel += 2
-        elif fchoice == 'poop':
+            print(f"your pets hunger level went up by 2")
+        elif food == 'poop':
             self.hungerlevel -= 2
             self.happinesslevel -= 10
+            print(f"your pets hunger level down by 2")
+            print(f"your pets happiness level went down by 10")
+        elif food == 'pet treats':
+            self.hungerlevel += 2
+            self.happinesslevel += 10
+            print(f"your pets hunger level went up by 2")
+        elif food == 'leftovers':
+            self.hungerlevel += 1
+            print(f"your pets hunger level went up by 1")
+        elif food == 'fruits':
+            self.hungerlevel += 2
+            self.happinesslevel += 1
+            print(f"your pets hunger level went up by 2")
+            print(f"your pets happiness level went up by 1")
+        elif food == 'vegetables':
+            self.hungerlevel += 1
+            print(f"your pets hunger level went up by 1")
+        else:
+            print(f"you fed your pet {food}")
+            print(f"nothing happened because you cant feed them {food} lol")
     def walk(self):
         print("you are now walking your pet.")
+        print(f"your pets happiness level went up by 2")
         self.happinesslevel += 2
 
 a = input("do you want to make and play with a virtual pet? type yes or no: ").lower()
@@ -106,7 +126,12 @@ elif a == "yes":
                 survive = False
                 achievements.append("#1 stupid")
                 print("you cant walk a fish stupid")
-                print(achievements)
+                print("your pet is dead now")
+                print("pet stats:")
+                print(f"name: {pet1.name}")
+                print(f"age: {pet1.age}")
+                print(f"pet type: {pet1.type}")
+                print(f"achievements: {achievements}")
             pet1.walk
         #game end
         elif game == 'stop':
@@ -120,13 +145,26 @@ elif a == "yes":
             print("type 5 to feed")
             print("type 6 to walk your pet")
             print("type 'stop' to stop game")
-        else:
-            print("that is invalid. type 'rules' to check rules")
-
+        #pet died of hunger
+        if pet1.hungerlevel <= 0:
+            survive = False
+            print("lol your pet starved to death")
+            achievements.append("starvation")
+            print("ggs! ur done playing xiyangs super omega amazing beautiful cute fun pet game!!!!!!")
+            print("pet stats:")
+            print(f"name: {pet1.name}")
+            print(f"age: {pet1.age}")
+            print(f"pet type: {pet1.type}")
+            print(f"achievements: {achievements}")
+        #ran out of happiness
+        if pet1.happinesslevel <= 0:
+            print("ur pets happiness is in the dumps")
+            achievements.append("hasan")
         #every 5 plays pet grows 1 year old
         loops += 1
         if loops % 5 == 0:
             pet1.age += 1
+            pet1.hungerlevel -= 5
     #end stats
     if game == "stop":
         print("ggs! ur done playing xiyangs super omega amazing beautiful cute fun pet game!!!!!!")
