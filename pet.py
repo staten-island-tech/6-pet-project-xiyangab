@@ -26,7 +26,7 @@ class pet():
         elif food == 'poop':
             self.hungerlevel -= 2
             self.happinesslevel -= 10
-            print(f"your pets hunger level down by 2")
+            print(f"your pets hunger level went down by 2")
             print(f"your pets happiness level went down by 10")
         elif food == 'pet treats':
             self.hungerlevel += 2
@@ -50,6 +50,16 @@ class pet():
         print("you are now walking your pet.")
         print(f"your pets happiness level went up by 2")
         self.happinesslevel += 2
+    def show_rules():
+        print("how to play the game:")
+        print("type 1 to check age")
+        print("type 2 to check hunger level")
+        print("type 3 to check happiness")
+        print("type 4 to use shock collar")
+        print("type 5 to feed")
+        print("type 6 to walk your pet")
+        print("type 'stop' to stop game")
+        print("type 'rules' to check rules again")
 
 a = input("do you want to make and play with a virtual pet? type yes or no: ").lower()
 #conditional statement to start making a character
@@ -70,9 +80,10 @@ elif a == "yes":
 
     b = input("type yes or no to confirm stats: ").lower()
     #loop to confirm pet stats so if user makes a mistake they could redo it
-    while b != "yes":
+    while b == 'no':
         petname = input("what do you want to name your pet?: ")
         petage = int(input("how old is your pet in years?: "))
+        pettype = input("what type of pet do you want?: ").lower()
         pet1 = pet(petname, petage, pettype, 50, 50)
 
         print("confirm your pet stats:")
@@ -84,23 +95,15 @@ elif a == "yes":
 
         b = input("type yes or no to confirm stats: ").lower()
         
-    print("how to play the game:")
-    print("type 1 to check age")
-    print("type 2 to check hunger level")
-    print("type 3 to check happiness")
-    print("type 4 to use shock collar")
-    print("type 5 to feed")
-    print("type 6 to walk your pet")
-    print("type 'stop' to stop game")
-    print("type 'rules' to check rules")
+    pet1.show_rules()
 
     #loop to finally start playing the game
     survive = True
     loops = 0
+    achievements = []
     while survive == True:
         #have to code the rest of the game
         #i should code achievements!!
-        achievements = []
         game = input("what do you want to do?").lower()
 
         #age check
@@ -120,6 +123,16 @@ elif a == "yes":
         #feed
         elif game == '5':
             pet1.feed()
+            if pet1.hungerlevel <= 0:
+                survive = False
+                print("lol your pet starved to death")
+                achievements.append("starvation")
+                print("ggs! ur done playing xiyangs super omega amazing beautiful cute fun pet game!!!!!!")
+                print("pet stats:")
+                print(f"name: {pet1.name}")
+                print(f"age: {pet1.age}")
+                print(f"pet type: {pet1.type}")
+                print(f"achievements: {achievements}")
         #walk
         elif game == '6':
             if pet1.type == 'fish':
@@ -132,34 +145,24 @@ elif a == "yes":
                 print(f"age: {pet1.age}")
                 print(f"pet type: {pet1.type}")
                 print(f"achievements: {achievements}")
-            pet1.walk
+            else:
+                pet1.walk()
         #game end
         elif game == 'stop':
             survive = False
         #rules
         elif game == 'rules':
-            print("type 1 to check age")
-            print("type 2 to check hunger level")
-            print("type 3 to check happiness")
-            print("type 4 to use shock collar")
-            print("type 5 to feed")
-            print("type 6 to walk your pet")
-            print("type 'stop' to stop game")
-        #pet died of hunger
-        if pet1.hungerlevel <= 0:
+            pet1.show_rules()
+        #ran out of happiness
+        if pet1.happinesslevel <= 0:
             survive = False
-            print("lol your pet starved to death")
-            achievements.append("starvation")
-            print("ggs! ur done playing xiyangs super omega amazing beautiful cute fun pet game!!!!!!")
+            print("ur pets happiness is in the dumps. they have escaped.")
+            achievements.append("hasan")
             print("pet stats:")
             print(f"name: {pet1.name}")
             print(f"age: {pet1.age}")
             print(f"pet type: {pet1.type}")
             print(f"achievements: {achievements}")
-        #ran out of happiness
-        if pet1.happinesslevel <= 0:
-            print("ur pets happiness is in the dumps")
-            achievements.append("hasan")
         #every 5 plays pet grows 1 year old
         loops += 1
         if loops % 5 == 0:
@@ -173,6 +176,5 @@ elif a == "yes":
         print(f"age: {pet1.age}")
         print(f"pet type: {pet1.type}")
         print(f"achievements: {achievements}")
-
 else: 
     print("your input is invalid. please do not put numbers or any special characters")
