@@ -32,6 +32,7 @@ class pet():
             self.hungerlevel += 2
             self.happinesslevel += 10
             print(f"your pets hunger level went up by 2")
+            print(f"your pets happiness level went up by 10")
         elif food == 'leftovers':
             self.hungerlevel += 1
             print(f"your pets hunger level went up by 1")
@@ -50,7 +51,7 @@ class pet():
         print("you are now walking your pet.")
         print(f"your pets happiness level went up by 2")
         self.happinesslevel += 2
-    def show_rules():
+    def show_rules(self):
         print("how to play the game:")
         print("type 1 to check age")
         print("type 2 to check hunger level")
@@ -101,6 +102,7 @@ elif a == "yes":
     survive = True
     loops = 0
     achievements = []
+    unlock = False
     while survive == True:
         #have to code the rest of the game
         #i should code achievements!!
@@ -133,6 +135,9 @@ elif a == "yes":
                 print(f"age: {pet1.age}")
                 print(f"pet type: {pet1.type}")
                 print(f"achievements: {achievements}")
+            elif pet1.hungerlevel >= 100 and 'super owner' not in achievements:
+                achievements.append('super owner')
+
         #walk
         elif game == '6':
             if pet1.type == 'fish':
@@ -164,10 +169,11 @@ elif a == "yes":
             print(f"pet type: {pet1.type}")
             print(f"achievements: {achievements}")
         #every 5 plays pet grows 1 year old
-        loops += 1
-        if loops % 5 == 0:
-            pet1.age += 1
-            pet1.hungerlevel -= 5
+        if survive == True:
+            loops += 1
+            if loops % 5 == 0:
+                pet1.age += 1
+                pet1.hungerlevel -= 5
     #end stats
     if game == "stop":
         print("ggs! ur done playing xiyangs super omega amazing beautiful cute fun pet game!!!!!!")
