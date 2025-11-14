@@ -61,7 +61,6 @@ class pet():
         print("type 6 to walk your pet")
         print("type 'stop' to stop game")
         print("type 'rules' to check rules again")
-
 a = input("do you want to make and play with a virtual pet? type yes or no: ").lower()
 #conditional statement to start making a character
 if a == "no":
@@ -71,14 +70,12 @@ elif a == "yes":
     petage = int(input("how old is your pet in years?: "))
     pettype = input("what type of pet do you want?: ").lower()
     pet1 = pet(petname, petage, pettype, 50, 50)
-
     print("confirm your pet stats:")
     print(f"name: {pet1.name}")
     print(f"age: {pet1.age}")
     print(f"pet type: {pet1.type}")
     print(f"all pets happiness levels start at {pet1.happinesslevel}%")
     print(f"all pets hunger levels start at {pet1.hungerlevel}%")
-
     b = input("type yes or no to confirm stats: ").lower()
     #loop to confirm pet stats so if user makes a mistake they could redo it
     while b == 'no':
@@ -86,18 +83,14 @@ elif a == "yes":
         petage = int(input("how old is your pet in years?: "))
         pettype = input("what type of pet do you want?: ").lower()
         pet1 = pet(petname, petage, pettype, 50, 50)
-
         print("confirm your pet stats:")
         print(f"name: {pet1.name}")
         print(f"age: {pet1.age}")
         print(f"pet type: {pet1.type}")
         print(f"all pets happiness levels start at {pet1.happinesslevel}%")
         print(f"all pets hunger levels start at {pet1.hungerlevel}%")
-
         b = input("type yes or no to confirm stats: ").lower()
-        
     pet1.show_rules()
-
     #loop to finally start playing the game
     survive = True
     loops = 0
@@ -137,7 +130,6 @@ elif a == "yes":
                 print(f"achievements: {achievements}")
             elif pet1.hungerlevel >= 100 and 'super owner' not in achievements:
                 achievements.append('super owner')
-
         #walk
         elif game == '6':
             if pet1.type == 'fish':
