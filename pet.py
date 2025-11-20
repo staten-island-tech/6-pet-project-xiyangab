@@ -145,7 +145,7 @@ elif a == "yes":
         elif game == '6':
             if pet1.type == 'fish':
                 survive = False
-                pet1.achievements.append("#1 stupid")
+                pet1.achievements.append("stupid bum")
                 print("you cant walk a fish stupid")
                 print("your pet is dead now")
                 pet1.stats()
