@@ -5,6 +5,7 @@ class Pet():
         self.type = type
         self.hungerlevel = hungerlevel
         self.happinesslevel = happinesslevel
+        self.achievements = []
     def agecheck(self):
         print(f"your pets age is {self.age}")
     def hungerlevelcheck(self):
@@ -16,7 +17,7 @@ class Pet():
         print(f"your pets happiness level went down by 5")
         self.happinesslevel -= 5
     def feed(self):
-        fchoice = ['bread','poop','pet treats','leftovers','fruits','vegetables']
+        fchoice = ['bread','poop','treats','leftovers','fruits','vegetables']
         print(f"food choices: {fchoice}")
         food = input(f"what do you want to feed your pet?: ").lower()
         print(f"you fed your pet {food}")
@@ -28,7 +29,7 @@ class Pet():
             self.happinesslevel -= 10
             print(f"your pets hunger level went down by 2")
             print(f"your pets happiness level went down by 10")
-        elif food == 'pet treats':
+        elif food == 'treats':
             self.hungerlevel += 2
             self.happinesslevel += 10
             print(f"your pets hunger level went up by 2")
@@ -63,10 +64,10 @@ class Pet():
         print("type 'rules' to check rules again")
     def stats(self):
         print("pet stats:")
-        print(f"name: {pet1.name}")
-        print(f"age: {pet1.age}")
-        print(f"pet type: {pet1.type}")
-        print(f"achievements: {achievements}")
+        print(f"name: {self.name}")
+        print(f"age: {self.age}")
+        print(f"pet type: {self.type}")
+        print(f"achievements: {self.achievements}")
 a = input("do you want to make and play with a virtual pet? type yes or no: ").lower()
 #conditional statement to start making a character
 if a == "no":
@@ -100,17 +101,16 @@ elif a == "yes":
     #loop to finally start playing the game
     survive = True
     loops = 0
-    achievements = []
-    unlock = False
     while survive == True:
         import random
         event = random.randint(1,50)
         if event == 1:
             survive = False
             print("wow thats unlucky. a shooter has broke into your house!")
-            print("you got shot and your pet died tough luck")
+            print("you got shot and your pet was enslaved tough luck")
             pet1.stats()
-        elif event == 0 or 10 or 20 or 30 or 40 or 50:
+            break
+        elif event in (10, 50):
             print("wow, your pet just threw up. thats nasty")
             print("your pets hunger and happiness level just got halved!")
             pet1.hungerlevel = pet1.hungerlevel / 2
@@ -126,7 +126,7 @@ elif a == "yes":
         elif game == '3':
             pet1.happinesslevelcheck()
             if pet1.happinesslevel >= 100:
-                achievements.append("best pet owner oat")
+                pet1.achievements.append("best pet owner oat")
         #shock collar
         elif game == '4':
             pet1.shockcollar()
@@ -136,19 +136,20 @@ elif a == "yes":
             if pet1.hungerlevel <= 0:
                 survive = False
                 print("lol your pet starved to death")
-                achievements.append("starvation")
-                print("ggs! ur done playing xiyangs super omega amazing beautiful cute fun pet game!!!!!!")
+                pet1.achievements.append("starvation")
                 pet1.stats()
-            elif pet1.hungerlevel >= 100 and 'super owner' not in achievements:
-                achievements.append('super owner')
+                break
+            elif pet1.hungerlevel >= 100 and 'super owner' not in pet1.achievements:
+                pet1.achievements.append('super owner')
         #walk
         elif game == '6':
             if pet1.type == 'fish':
                 survive = False
-                achievements.append("#1 stupid")
+                pet1.achievements.append("#1 stupid")
                 print("you cant walk a fish stupid")
                 print("your pet is dead now")
                 pet1.stats()
+                break
             else:
                 pet1.walk()
         #game end
@@ -161,8 +162,9 @@ elif a == "yes":
         if pet1.happinesslevel <= 0:
             survive = False
             print("ur pets happiness is in the dumps. they have escaped.")
-            achievements.append("hasan")
+            pet1.achievements.append("hasan")
             pet1.stats()
+            break
         #every 5 plays pet grows 1 year old
         if survive == True:
             loops += 1
